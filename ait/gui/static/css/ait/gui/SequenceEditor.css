@@ -1,0 +1,84 @@
+/*
+ * Advanced Multi-Mission Operations System (AMMOS) Instrument Toolkit (AIT)
+ * Bespoke Link to Instruments and Small Satellites (BLISS)
+ *
+ * Copyright 2017, by the California Institute of Technology. ALL RIGHTS
+ * RESERVED. United States Government Sponsorship acknowledged. Any
+ * commercial use must be negotiated with the Office of Technology Transfer
+ * at the California Institute of Technology.
+ *
+ * This software may be subject to U.S. export control laws. By accepting
+ * this software, the user agrees to comply with all applicable U.S. export
+ * laws and regulations. User has the responsibility to obtain export licenses,
+ * or other export authority as may be required before exporting such
+ * information to foreign countries or providing access to foreign persons.
+ *
+ * Open Source Contributing Author: Tyler O'Brien, Qwaltec, Inc.
+ * Affiliation: Arizona State University (ASU), Lunar Polar Hyrdogen Mapper (LunaH-Map)
+ */
+
+ @media (min-width: 1945px) {
+    ait-commandsearchsequence {
+        height: auto;
+    }
+
+    ait-commandconfiguresequence > div {
+        /* Use this with the fixed footer */
+        /* height: calc(100vh - 510px); */
+        /* Use this without the fixed footer */
+        height: calc(100vh - 290px);
+        overflow: auto;
+    }
+
+    ait-commandsearchsequence .command_accordions_list {
+        /* Use this with the fixed footer*/
+        /* height: calc(100vh - 570px); */
+        /* Use this without the fixed footer */
+        height: calc(100vh - 350px);
+        overflow: auto;
+    }
+}
+
+@media (max-width: 1944px) {
+    ait-commandsearchsequence {
+        height: 500px;
+    }
+
+    ait-commandconfiguresequence > div {
+        height: 500px;
+        overflow: auto;
+    }
+
+    ait-commandsearchsequence .command_accordions_list {
+        height: 430px;
+        overflow: auto;
+    }
+}
+
+ait-commandsearchsequence .command_tree {
+    margin-top: 20px;
+}
+
+/**
+ * Naming convention inconsistency here is due to this being
+ * an override of the bootstrap accordion panel-heading class.
+ */
+ ait-commandsearchsequence .panel-heading {
+    display: block;
+    cursor: pointer;
+}
+
+ait-commandsearchsequence .command_list {
+    list-style-type: none;
+    padding-left: 0;
+
+}
+
+ait-commandconfiguresequence .command_selection_help {
+    margin-top: 20px;
+}
+
+ait-commandconfiguresequence .command_customization_form {
+    margin-top: 20px;
+    overflow: hidden;
+} 

@@ -1107,6 +1107,53 @@ def handle():
         Sessions.addEvent('prompt:done', None)
         PromptResponse = json.loads(bottle.request.body.read())
 
+# SEQUENCE ADD
+@App.route('/seqedit/add', method='POST')
+def handle():
+    '''Add a command and its parameters to the current command sequence file'''
+    command = bottle.request.forms.get('command').strip()
+    add_to_sequence_status = ''
+
+    args = command.split()
+    if args:
+        name = args[0].upper()
+        args = [util.toNumber(t, t) for t in args[1:]]
+
+        if add_to_command_sequence(command, name, *args):
+            add_to_sequence_status = '{} Added command to command sequence'.format(command)
+            bottle.response.status = 200
+        else:
+            add_to_sequence_status = '{} Error adding command to command sequence'.format(command)
+            bottle.response.status = 400
+    else:
+        add_to_sequence_status = '{} Error adding command to command sequence'.format(command)
+        bottle.response.status = 400
+
+    bottle.response.content_type = 'application/json'
+    return json.dumps({
+        'status': add_to_sequence_status
+    })
+
+
+def add_to_command_sequence(self, command, name, *args, **kwargs):
+    """Validates and writes the given command to a command
+    sequence text file.
+    Returns True if the command was valid, and written to the file,
+    False otherwise.
+    """
+    status   = False
+    cmdobj   = CMD_API._cmddict.create(name, *args, **kwargs)
+    messages = []
+
+    if not cmdobj.validate(messages):
+        for msg in messages:
+            log.error(msg)
+    else:
+       # Write the command to command sequence text file
+       log.info("Adding this command to the command sequence file: %s" % command)
+       status = True
+
+    return status
 
 class UIAbortException(Exception):
     """ Raised when user aborts script execution via GUI controls """
